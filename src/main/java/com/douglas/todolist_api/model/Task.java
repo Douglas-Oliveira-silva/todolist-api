@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 /*
 * @Entity: diz ao Spring que essa classe vai virar uma tabela no banco.
@@ -22,8 +25,14 @@ public class Task {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String description;
-    private boolean completed;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
 }
