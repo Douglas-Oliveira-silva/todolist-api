@@ -1,0 +1,37 @@
+package com.douglas.todolist_api.service;
+
+import com.douglas.todolist_api.model.Task;
+import com.douglas.todolist_api.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+
+/*
+@Service: Indica que esta classe é um componente de serviço no Spring, usado para conter lógica de negócios.
+@Autowired: Injeta automaticamente o repositório para ser utilizado na classe.
+*/
+
+@Service
+public class TaskService {
+
+        @Autowired
+        private TaskRepository taskRepository;
+
+        public List<Task> findAllTasks(){
+            return taskRepository.findAll();
+    }
+        public Optional<Task> findbyId(Long id) {
+            return taskRepository.findById(id);
+        }
+
+        public Task save(Task task) {
+            return taskRepository.save(task);
+        }
+
+        public void deleteById(Long id){
+            taskRepository.deleteById(id);
+        }
+}
