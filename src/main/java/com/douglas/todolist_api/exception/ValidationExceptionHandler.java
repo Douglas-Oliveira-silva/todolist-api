@@ -23,7 +23,7 @@ public class ValidationExceptionHandler {
     public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->{
-            error.put(error.getField(), error.getDefaultMessage());
+            errors.put(error.getField(), error.getDefaultMessage());
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
 
