@@ -2,6 +2,7 @@ package com.douglas.todolist_api.controller;
 
 import com.douglas.todolist_api.model.Task;
 import com.douglas.todolist_api.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class TaskController {
     }
        // GET / Tasks
     @PostMapping
-    public Task createTask(@RequestBody Task task){
+    public Task createTask(@RequestBody @Valid Task task){
            return taskService.save(task);
         }
         // DELETE / Tasks/{id}

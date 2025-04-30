@@ -1,10 +1,13 @@
 package com.douglas.todolist_api.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+
 
 import java.time.LocalDateTime;
 
@@ -26,13 +29,17 @@ public class Task {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O título é obrigatório")
     private String title;
+
+    @NotBlank(message = "A descrição é obrigatória")
     private String description;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "O status não pode ser nulo")
     private Status status;
 
 }
