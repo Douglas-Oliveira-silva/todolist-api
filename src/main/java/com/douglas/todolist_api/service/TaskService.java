@@ -6,6 +6,7 @@ import com.douglas.todolist_api.repository.TaskRepository;
 import jakarta.validation.Valid;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -58,6 +59,15 @@ public class TaskService {
     public List<Task> findTasksByTitle(String title){
             return taskRepository.findByTitleContainingIgnoreCase(title);
     }
+
+    public List<Task> findAllOrderedByCreatedAt(String direction){
+            Sort sort = direction.equalsIgnoreCase("desc")
+            ? Sort.by("createdAt").descending()
+            : Sort.by("createdAt").ascending();
+
+                return taskRepository.findAll(sort);
+    }
+
 
 }
 

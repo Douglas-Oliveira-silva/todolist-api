@@ -59,6 +59,10 @@ public class TaskController {
     public List<Task> getTaskByTitle(@RequestParam String title){
         return taskService.findTasksByTitle(title);
     }
+    @GetMapping ("/sorted")
+    public List<Task> getAllTasksOrdered(@RequestParam(defaultValue = "asc") String direction){
+        return taskService.findAllOrderedByCreatedAt(direction);
+    }
 
 
     }
