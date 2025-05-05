@@ -12,4 +12,6 @@ import java.util.List;
     public interface TaskRepository extends JpaRepository<Task, Long>{
         List<Task> findByStatus(Status status);
 
+        // Busca por título (parcial) | irá ignorar maiusculas e minusculas
+        List<Task> findByTitleContainingIgnoreCase(String title);
     }

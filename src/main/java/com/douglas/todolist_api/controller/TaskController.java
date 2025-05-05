@@ -55,6 +55,12 @@ public class TaskController {
         return taskService.findByStatus(status);
     }
 
+    @GetMapping("/search")
+    public List<Task> getTaskByTitle(@RequestParam String title){
+        return taskService.findTasksByTitle(title);
+    }
+
+
     }
 
 

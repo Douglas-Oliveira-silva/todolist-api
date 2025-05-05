@@ -53,5 +53,11 @@ public class TaskService {
             return taskRepository.save(task);
         }).orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
     }
+
+    // Metodo para buscar tarefas por título
+    public List<Task> findTasksByTitle(String title){
+            return taskRepository.findByTitleContainingIgnoreCase(title);
+    }
+
 }
 
