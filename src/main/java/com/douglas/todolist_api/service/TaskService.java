@@ -2,8 +2,13 @@ package com.douglas.todolist_api.service;
 
 import com.douglas.todolist_api.model.Task;
 import com.douglas.todolist_api.repository.TaskRepository;
+import jakarta.validation.Valid;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,4 +39,14 @@ public class TaskService {
         public void deleteById(Long id){
             taskRepository.deleteById(id);
         }
+
+    public Task updateTask(Long id, Task updatedTask) {
+        return taskRepository.findById(id).map(task -> {
+            task.setTitle(updatedTask.getTitle());
+            task.setDescription(updatedTask.getDescription());
+            task.setStatus(updatedTask.getStatus());
+            return taskRepository.save(task);
+        }).orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
+    }
 }
+

@@ -44,6 +44,11 @@ public class TaskController {
             taskService.deleteById(id);
     }
 
+    @PutMapping("/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody @Valid Task task){
+        return taskService.updateTask(id, task);
+    }
+
     }
 
 
