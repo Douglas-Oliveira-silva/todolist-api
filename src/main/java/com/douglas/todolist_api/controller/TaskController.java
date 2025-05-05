@@ -1,5 +1,6 @@
 package com.douglas.todolist_api.controller;
 
+import com.douglas.todolist_api.model.Status;
 import com.douglas.todolist_api.model.Task;
 import com.douglas.todolist_api.service.TaskService;
 import jakarta.validation.Valid;
@@ -47,6 +48,11 @@ public class TaskController {
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable Long id, @RequestBody @Valid Task task){
         return taskService.updateTask(id, task);
+    }
+
+    @GetMapping("/status")
+    public List<Task> getTasksByStatus(@RequestParam Status status){
+        return taskService.findByStatus(status);
     }
 
     }

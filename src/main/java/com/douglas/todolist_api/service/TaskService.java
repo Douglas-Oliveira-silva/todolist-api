@@ -1,5 +1,6 @@
 package com.douglas.todolist_api.service;
 
+import com.douglas.todolist_api.model.Status;
 import com.douglas.todolist_api.model.Task;
 import com.douglas.todolist_api.repository.TaskRepository;
 import jakarta.validation.Valid;
@@ -30,6 +31,10 @@ public class TaskService {
     }
         public Optional<Task> findbyId(Long id) {
             return taskRepository.findById(id);
+        }
+        public List<Task>findByStatus(Status status){
+            return taskRepository.findByStatus(status);
+
         }
 
         public Task save(Task task) {
