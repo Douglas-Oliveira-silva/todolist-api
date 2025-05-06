@@ -42,4 +42,17 @@ public class Task {
     @NotNull(message = "O status não pode ser nulo")
     private Status status;
 
+    // construtor para testes
+    public Task(Long id, String title, String description, Status status){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.createdAt = createdAt;
+    }
+
+    public Task(){
+        //construtor vazio
+    }
+
 }
