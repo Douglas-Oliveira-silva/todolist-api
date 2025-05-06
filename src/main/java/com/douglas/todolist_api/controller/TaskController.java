@@ -64,6 +64,10 @@ public class TaskController {
         return taskService.findAllOrderedByCreatedAt(direction);
     }
 
+    public TaskController(TaskService taskService){
+        this.taskService = taskService;
+    }
+
 
     }
 

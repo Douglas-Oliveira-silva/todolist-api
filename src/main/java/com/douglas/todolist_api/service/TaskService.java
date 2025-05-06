@@ -68,6 +68,11 @@ public class TaskService {
                 return taskRepository.findAll(sort);
     }
 
+    // para realizarmos os testes (mock)
+    public TaskService(TaskRepository taskRepository){
+            this.taskRepository = taskRepository;
+    }
+
 
 }
 
