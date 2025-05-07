@@ -30,12 +30,14 @@ public class TaskControllerTest {
 
         // Cria o controller passado o service mockado
         taskController = new TaskController(taskService);
+
+       /* List<Task> mockTasks = Arrays.asList(
+                TaskTestHelper.createTask1(),
+                TaskTestHelper.createTask2()
+        );**/
     }
 
-    List<Task> mockTasks = Arrays.asList(
-            TaskTestHelper.createTask1(),
-            TaskTestHelper.createTask2()
-    );
+
 
     @Test
     void shoudReturnListOfTasks(){
@@ -45,6 +47,12 @@ public class TaskControllerTest {
         // Dizemos ao Mockito: "Quando o metodo findAll for chamado, retorne mockTasks"
         Mockito.when(taskRepository.findAll()).thenReturn(mockTasks);
 
+        // Act: chamaos o metodo que queremos testar
+        List<Task> result = taskController.getAllTasks();
+
+        // Assert: verificamos se o resultado bate com o esperado
+        assertEquals(mockTasks.size(), result.size()); // verifica se retornou a mesma quantidade
+        assertEquals(mockTasks.get(0).getTitle(), result.get(0).getTitle()); // verifica o primeiro título
 
     }
 
