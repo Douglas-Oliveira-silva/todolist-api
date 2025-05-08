@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*; //importa os métodos assert*
 
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskControllerTest {
@@ -40,7 +39,7 @@ public class TaskControllerTest {
 
 
     @Test
-    void shoudReturnListOfTasks(){
+    void shouldReturnListOfTasks(){
         // Arrange: criamos a lista que o repositório mockado deve retornar
         List<Task> mockTasks = TaskTestHelper.createSampleTasks();
 
@@ -54,6 +53,24 @@ public class TaskControllerTest {
         assertEquals(mockTasks.size(), result.size()); // verifica se retornou a mesma quantidade
         assertEquals(mockTasks.get(0).getTitle(), result.get(0).getTitle()); // verifica o primeiro título
 
+    }
+    @Test
+    void shouldCreateTaskSuccessfully(){
+        // Arrange (preparar)
+        Task newTask = new Task(null, "Estudar teste","Estudar como criar testes unitário", Status.PENDENTE);
+        Task savedTask = new Task(1L,"Estudar testes", "Estudar como criar testes unitário", Status.PENDENTE);
+
+        Mockito.when(taskRepository.save(newTask)).thenReturn(savedTask);
+
+       // Act (Executar)
+
+       Task result = taskController.createTask(newTask);
+
+       // Assert (verificar)
+        assertNotNull(result.getId());
+        assertEquals(savedTask.getTitle(),result.getTitle());
+        assertEquals(savedTask.getDescription(),result.getDescription());
+        assertEquals(Status.PENDENTE,result.getStatus());
     }
 
 
